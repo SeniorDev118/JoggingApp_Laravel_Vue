@@ -123,7 +123,7 @@ class AuthController extends Controller
 
     public function uploadimage(Request $request)
     {
-        var_dump($request);
+        echo($request);
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|between:6,25'

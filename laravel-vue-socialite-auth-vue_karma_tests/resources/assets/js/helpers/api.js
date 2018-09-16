@@ -21,3 +21,16 @@ export function post(url, data) {
         }
     })
 }
+
+export function upload(url, file) {
+    let formData = new FormData()
+    formData.append('file', file);
+    return axios.post( url,
+        formData,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        }
+    );
+ }

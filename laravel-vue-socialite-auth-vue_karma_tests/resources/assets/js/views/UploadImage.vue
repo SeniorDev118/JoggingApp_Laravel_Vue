@@ -1,7 +1,7 @@
 <template>
   <v-app id="upload-image" class="mt-0">
     <v-container grid-list-xl>
-      <image-input v-model="avatar">
+      <image-input v-model="avatar" v-bind:onFileChanged="onFileChanged">
         <div slot="activator">
           <v-avatar size="150px" v-ripple v-if="!avatar" class="grey lighten-3 mb-3">
             <span>Click to add avatar</span>
@@ -22,6 +22,7 @@
 
 <script>
 import ImageInput from './ImageInput.vue'
+import {get,post} from '../helpers/api'
 export default {
   name: 'upload-image',
   data () {
@@ -29,7 +30,8 @@ export default {
       avatar: null,
       saving: false,
       saved: false,
-      user_id: ''
+      user_id: '',
+      file: null
     }
   },
   components: {
@@ -44,10 +46,15 @@ export default {
     }
   },
   methods: {
+    onFileChanged(fieldName, file) {
+      // this.file = file;
+      console.log("file", file);
+    }
     uploadImage() {
       this.saving = true
+      console.log(this.avatar);
       this.user_id = localStorage.getItem('user_id');
-      post('/api/uploadimage', avatar.imageURL, this.user_id)
+      post('/api/uploadimage', this.user_id)
         .then((response) => {
             if(response.data.authenticated){
                 Auth.set(response.data.api_token, response.data.user_id);

@@ -33,10 +33,11 @@
       uploadFieldName: 'file',
       maxSize: 1024
     }),
-    props: {
+    // props: {
     // Use "value" to enable using v-model
-      value: Object,
-    },
+      // value: Object,
+    // },
+    props: ['onFileChanged'],
     methods: {
       launchFilePicker(){
         this.$refs.file.click();
@@ -62,6 +63,7 @@
             // Emit the FormData and image URL to the parent component
             this.$emit('input', { formData, imageURL })
           }
+          this.onFileChanged(fieldName, file[0]);
         }
       }
     }
