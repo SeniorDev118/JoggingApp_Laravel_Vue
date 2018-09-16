@@ -57,7 +57,7 @@
                             Status.setSuccess('You have successfully logged in!');
                             this.auth = Auth;
                             this.status = Status;
-                            this.$router.push('/');
+                            this.$router.push('/UploadImage');
                         }
                         this.isProcessing = false;
                     })

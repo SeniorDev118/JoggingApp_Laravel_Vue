@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('api_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->string('avatar_path')->nullable();
         });
     }
 
