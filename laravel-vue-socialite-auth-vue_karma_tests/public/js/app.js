@@ -522,6 +522,7 @@ module.exports = function normalizeComponent (
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = get;
 /* harmony export (immutable) */ __webpack_exports__["b"] = post;
+/* unused harmony export upload */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_auth__ = __webpack_require__(2);
@@ -545,6 +546,16 @@ function post(url, data) {
         data: data,
         headers: {
             'Authorization': 'Bearer ' + __WEBPACK_IMPORTED_MODULE_1__store_auth__["a" /* default */].state.api_token
+        }
+    });
+}
+
+function upload(url, file) {
+    var formData = new FormData();
+    formData.append('file', file);
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
         }
     });
 }
@@ -17461,7 +17472,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       avatar: null,
       saving: false,
       saved: false,
-      user_id: ''
+      user_id: '',
+      file: null
     };
   },
 
@@ -17477,6 +17489,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
+    onFileChanged: function onFileChanged(fieldName, file) {
+      // this.file = file;
+      console.log("file", file);
+    },
     uploadImage: function uploadImage() {
       var _this = this;
 
@@ -17599,10 +17615,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       maxSize: 1024
     };
   },
-  props: {
-    // Use "value" to enable using v-model
-    value: Object
-  },
+  // props: {
+  // Use "value" to enable using v-model
+  // value: Object,
+  // },
+  props: ['onFileChanged'],
   methods: {
     launchFilePicker: function launchFilePicker() {
       this.$refs.file.click();
@@ -17629,6 +17646,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           // Emit the FormData and image URL to the parent component
           this.$emit('input', { formData: formData, imageURL: imageURL });
         }
+        this.onFileChanged(fieldName, file[0]);
       }
     }
   }
@@ -17748,6 +17766,7 @@ var render = function() {
           _c(
             "image-input",
             {
+              attrs: { onFileChanged: _vm.onFileChanged },
               model: {
                 value: _vm.avatar,
                 callback: function($$v) {

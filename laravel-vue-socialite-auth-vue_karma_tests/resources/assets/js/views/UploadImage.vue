@@ -22,7 +22,7 @@
 
 <script>
 import ImageInput from './ImageInput.vue'
-import {get,post} from '../helpers/api'
+import {get, post, upload} from '../helpers/api'
 export default {
   name: 'upload-image',
   data () {
@@ -49,7 +49,7 @@ export default {
     onFileChanged(fieldName, file) {
       // this.file = file;
       console.log("file", file);
-    }
+    },
     uploadImage() {
       this.saving = true
       console.log(this.avatar);
