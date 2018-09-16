@@ -6,4 +6,4 @@ Route::get('/social/{provider}/callback', 'AuthController@handleProviderCallback
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
-Route::post('/uploadimage', 'AuthController@logout');
+Route::post('/uploadimage', 'AuthController@uploadimage');
