@@ -121,26 +121,20 @@ class AuthController extends Controller
         ], 422);
     }
 
-    public function uploadimage(Request $request)
+    public function upload(Request $request)
     {
-        echo($request);
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|between:6,25'
-        ]);
-        $user = User::where('email', $request->email)->first();
-        if ($user && Hash::check($request->password, $user->password)) {
-            $user->api_token = str_random(60);
-            $user->save();
+        $user = $request->user();
+        if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/comment/');
+            $image->move($location, $filename);
+            $image_url = 'images/comment/'.$filename;
+            User::where('id', $user->id)->update(['image_path' => $image_url]);
             return response()->json([
-                'authenticated' => true,
-                'api_token' => $user->api_token,
-                'user_id' => $user->id
+                'image_url' => $image_url,
             ]);
         }
-        return response()->json([
-            'error' => 'Provided email and password does not match or not exists!'
-        ], 422);
     }
 
     public function logout(Request $request)
