@@ -33,10 +33,6 @@
       uploadFieldName: 'file',
       maxSize: 1024
     }),
-    // props: {
-    // Use "value" to enable using v-model
-      // value: Object,
-    // },
     props: ['onFileChanged'],
     methods: {
       launchFilePicker(){

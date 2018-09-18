@@ -13,6 +13,7 @@ export default {
             this.set(cookie.api_token,cookie.user_id)
             this.state.error = cookie.error;
             this.state.redirect = cookie.redirect;
+            this.state.image_url = cookie.image_url;
         } else {
             this.state.api_token = localStorage.getItem('api_token');
             this.state.user_id = parseInt(localStorage.getItem('user_id'));

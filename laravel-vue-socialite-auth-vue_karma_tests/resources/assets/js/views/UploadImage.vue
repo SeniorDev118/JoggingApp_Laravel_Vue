@@ -23,6 +23,7 @@
 <script>
 import ImageInput from './ImageInput.vue'
 import {get, post, upload} from '../helpers/api'
+import Auth from '../../store/auth'
 export default {
   name: 'upload-image',
   data () {
@@ -31,7 +32,8 @@ export default {
       saving: false,
       saved: false,
       user_id: '',
-      file: null
+      file: null,
+      auth: null
     }
   },
   components: {
@@ -47,35 +49,25 @@ export default {
   },
   methods: {
     onFileChanged(fieldName, file) {
-      // this.file = file;
-      console.log("file", file);
+      this.file = file;
     },
     uploadImage() {
-      this.saving = true
-      console.log(this.avatar);
-      this.user_id = localStorage.getItem('user_id');
-      post('/api/uploadimage', this.user_id)
-        .then((response) => {
-            if(response.data.authenticated){
-                Auth.set(response.data.api_token, response.data.user_id);
-                Status.setSuccess('You have successfully logged in!');
-                this.auth = Auth;
-                this.status = Status;
-                this.$router.push('/UploadImage');
-            }
-            this.isProcessing = false;
-        })
-        .catch((err) => {
-            if(err.response.data.error){
-                this.error = err.response.data.error;
-            }
-            this.isProcessing = false;
-        })
-      setTimeout(() => this.savedAvatar(), 1000)
+        if (this.file == null) {
+            return;
+        }
+        this.user_id = localStorage.getItem('user_id');
+        upload('/api/upload', this.file)
+            .then((response) => {
+              this.avatar.imageURL = response.data.image_url;
+            })
+            .catch((err) => {
+              console.log("error");
+            })
+        this.saved = true;
     },
     savedAvatar() {
-      this.saving = false
-      this.saved = true
+        this.saving = false
+        this.saved = true
     }
   }
 }
