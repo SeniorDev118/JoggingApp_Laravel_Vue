@@ -16,6 +16,7 @@
           <v-btn class="primary" @click="uploadImage" :loading="saving">Save Avatar</v-btn>
         </div>
       </v-slide-x-transition>
+      <data-show></data-show>
     </v-container>
   </v-app>
 </template>
@@ -23,7 +24,9 @@
 <script>
 import ImageInput from './ImageInput.vue'
 import {get, post, upload} from '../helpers/api'
-import Auth from '../../store/auth'
+import Auth from '../store/auth'
+import DataShow from './DataShow.vue'
+
 export default {
   name: 'upload-image',
   data () {
@@ -37,7 +40,8 @@ export default {
     }
   },
   components: {
-    ImageInput: ImageInput
+    ImageInput: ImageInput,
+    DataShow: DataShow
   },
   watch:{
     avatar: {
@@ -68,6 +72,14 @@ export default {
     savedAvatar() {
         this.saving = false
         this.saved = true
+    },
+    mounted() {
+        console.log("asdfasdf");return;
+      this.auth = Auth;
+      if (this.avatar == null) {
+        this.avatar = {imageURL: this.auth.state.image_url}
+        this.saved = true
+      }
     }
   }
 }

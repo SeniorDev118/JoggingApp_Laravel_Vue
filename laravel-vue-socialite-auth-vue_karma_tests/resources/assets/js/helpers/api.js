@@ -30,6 +30,7 @@ export function upload(url, file) {
         {
             headers: {
                 'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${Auth.state.api_token}`
             }
         }
     );

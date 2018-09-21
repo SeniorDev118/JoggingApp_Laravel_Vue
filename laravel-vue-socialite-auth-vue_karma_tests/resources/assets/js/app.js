@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import VueCookie from 'vue-cookie'
+import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
 import App from './App.vue'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(
   Vuetify, {
@@ -16,6 +19,7 @@ Vue.use(
   }
 )
 
+Vue.use(BootstrapVue);
 Vue.use(VueCookie);
 
 const app = new Vue({

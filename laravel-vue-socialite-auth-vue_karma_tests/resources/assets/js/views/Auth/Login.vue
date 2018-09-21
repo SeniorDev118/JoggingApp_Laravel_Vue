@@ -53,7 +53,7 @@
                 post('/api/login', this.form)
                     .then((response) => {
                         if(response.data.authenticated){
-                            Auth.set(response.data.api_token, response.data.user_id);
+                            Auth.set(response.data.api_token, response.data.user_id, response.data.image_url);
                             Status.setSuccess('You have successfully logged in!');
                             this.auth = Auth;
                             this.status = Status;

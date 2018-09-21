@@ -18,7 +18,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api')->only('logout');
+        $this->middleware('auth:api')->only('logout','upload');
     }
 
     /**
@@ -113,7 +113,8 @@ class AuthController extends Controller
             return response()->json([
                 'authenticated' => true,
                 'api_token' => $user->api_token,
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'image_url' => $user->avatar_path
             ]);
         }
         return response()->json([
@@ -130,7 +131,7 @@ class AuthController extends Controller
             $location = public_path('images/comment/');
             $image->move($location, $filename);
             $image_url = 'images/comment/'.$filename;
-            User::where('id', $user->id)->update(['image_path' => $image_url]);
+            User::where('id', $user->id)->update(['avatar_path' => $image_url]);
             return response()->json([
                 'image_url' => $image_url,
             ]);
