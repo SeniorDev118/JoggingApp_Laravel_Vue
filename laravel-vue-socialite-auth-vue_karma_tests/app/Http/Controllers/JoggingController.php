@@ -21,13 +21,15 @@ class JoggingController extends Controller
   {
     $this->validate($request, [
       // 'user_id' => 'required|max:255',
-      'name' => 'required|max:255',
-      'count' => 'required|max:255',
+      // 'name' => 'required|max:255',
+      // 'count' => 'required|max:255',
     ]);
 
     $jogging = new Jogging($request->all());
-    $jogging->name = $request->name;
-    $jogging->count = $request->count;
+    $jogging->distance = $request->distance;
+    $jogging->startdate = $request->startDate;
+    $jogging->enddate = $request->endDate;
+    $jogging->comment = $request->comment;
     $jogging->save();
     return response()->json([
       'registered' => true,
@@ -47,8 +49,10 @@ class JoggingController extends Controller
 
   public function updateitem(Request $request) {
     $data = Jogging::where('id', $request->id)->first ();
-    $data->name = $request->name;
-    $data->count = $request->count;
+    $data->distance = $request->distance;
+    $data->startdate = $request->startDate;
+    $data->enddate = $request->endDate;
+    $data->comment = $request->comment;
     $data->save();
     return $data;
   }

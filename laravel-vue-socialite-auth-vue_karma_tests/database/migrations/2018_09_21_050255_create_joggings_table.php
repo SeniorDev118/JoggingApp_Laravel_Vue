@@ -16,8 +16,10 @@ class CreateJoggingsTable extends Migration
         Schema::create('joggings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('user_id')->nullable();
-            $table->string('name');
-            $table->string('count');
+            $table->string('distance');
+            $table->string('startdate');
+            $table->string('enddate');
+            $table->string('comment');
             $table->rememberToken()->nullable();
             $table->timestamps();
         });

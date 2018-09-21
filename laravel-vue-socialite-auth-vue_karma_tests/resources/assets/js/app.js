@@ -22,6 +22,10 @@ Vue.use(
 Vue.use(BootstrapVue);
 Vue.use(VueCookie);
 
+Vue.component('modal', {
+  template: '#modal-template'
+})
+
 const app = new Vue({
     el: '#root',
     template: `<app></app>`,

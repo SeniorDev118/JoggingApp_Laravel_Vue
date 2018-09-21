@@ -3,39 +3,36 @@
       <div id="vue-wrapper">
         <div class="content">
           <div class="form-group text-left">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name"
-              required v-model="newItem.name" placeholder=" Enter some name">
+            <label for="distance">Distance:</label>
+            <input type="number" class="form-control" id="distance" name="distance"
+              required v-model="newItem.distance" placeholder=" Enter Distance">
           </div>
 
           <div class="form-group text-left">
-            <vue-ctk-date-time-picker></vue-ctk-date-time-picker>
-          </div>
-
-<!--           <div class="input-append date form_datetime">
-            <input size="16" type="text" value="" readonly>
-            <span class="add-on"><i class="icon-th"></i></span>
-          </div>
- -->
-<!--           <div class="form-group text-left">
-            <vue-ctk-date-time-picker></vue-ctk-date-time-picker>
-          </div>
- -->
-          <div class="form-group text-left">
-            <label for="age">Count:</label>
-            <input type="number" class="form-control" id="count" name="count"
-              required v-model="newItem.count" placeholder=" Enter Jogging Count">
           </div>
 
           <div class="form-group text-left">
-            <label for="profession">Profession:</label>
-            <input type="text" class="form-control" id="profession" name="profession"
-              required v-model="newItem.profession" placeholder=" Enter your profession">
+            <label for="startDate">StartDate:</label>
+            <input type="text" class="form-control" id="startDate" name="startDate"
+              required v-model="newItem.startDate" placeholder=" Enter StartDate">
           </div>
 
-          <button class="btn btn-primary" id="name" name="name" @click.prevent="createItem()">
-            <span class="glyphicon glyphicon-plus"></span> ADD
-          </button>
+          <div class="form-group text-left">
+            <label for="endDate">EndDate:</label>
+            <input type="text" class="form-control" id="endDate" name="endDate"
+              required v-model="newItem.endDate" placeholder=" Enter EndDate">
+          </div>
+
+          <div class="form-group text-left">
+            <label for="comment">Comment:</label>
+            <input type="text" class="form-control" id="comment" name="comment"
+              required v-model="newItem.comment" placeholder=" Enter Comment">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" width="100%" id="name" name="name" @click.prevent="createItem()">
+                <span class="glyphicon glyphicon-plus"></span> ADD
+            </button>
+          </div>
 
         <p class="text-center alert alert-danger"
             v-if="hasError">Please fill name!</p>
@@ -48,21 +45,22 @@
           <table class="table table-borderless" id="table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Count</th>
-                <th>Profession</th>
-                <th>Actions</th>
+                <th>No</th>
+                <th>Distance</th>
+                <th>StartDate</th>
+                <th>EndDate</th>
+                <th>Comment</th>
               </tr>
             </thead>
             <tr v-for="item in items">
               <td>{{ item.id }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.count }}</td>
-              <td>{{ item.profession }}</td>
+              <td>{{ item.distance }}</td>
+              <td>{{ item.startdate }}</td>
+              <td>{{ item.enddate }}</td>
+              <td>{{ item.comment }}</td>
 
               <td id="show-modal" class="btn btn-info">
-                <span @click="showModal=true; setVal(item.id, item.name, item.count)" >EDIT</span>
+                <span @click="showModal=true; setVal(item.id, item.distance, item.startDate, item.endDate, item.comment)" >EDIT</span>
               </td>
 
               <td class="btn btn-danger" @click.prevent="deleteItem(item)">
@@ -78,12 +76,18 @@
 
             <input type="hidden" disabled class="form-control" id="e_id" name="id"
                     required  :value="this.e_id">
-              Name:
-            <input type="text" class="form-control" id="e_name" name="name"
-                    required  :value="this.e_name">
-              Count:
-            <input type="number" class="form-control" id="e_count" name="count"
-                  required  :value="this.e_count">
+              ID:
+            <input type="number" class="form-control" id="e_distance" name="distance"
+                    required  :value="this.e_distance">
+              StartDate:
+            <input type="text" class="form-control" id="e_startDate" name="startDate"
+                  required  :value="this.e_startDate">
+              EndDate:
+            <input type="text" class="form-control" id="e_endDate" name="endDate"
+                  required  :value="this.e_endDate">
+              Comment:
+            <input type="text" class="form-control" id="e_comment" name="comment"
+                  required  :value="this.e_comment">
 
           </div>
           <div slot="footer">
@@ -114,11 +118,12 @@ export default {
     hasDeleted: false,
     hasCountError: false,
     showModal: false,
-    e_name: '',
-    e_count: '',
     e_id: '',
-    e_profession: '',
-    newItem: { 'name': '','count': '','profession': '' },
+    e_distance: '',
+    e_startDate: '',
+    e_endDate: '',
+    e_comment: '',
+    newItem: { 'id': '','distance': '','startDate': '','endDate': '','comment': '' },
   }),
   mounted: function mounted() {
     this.getVueItems();
@@ -135,10 +140,11 @@ export default {
         console.log("error");
       })
     },
-    setVal(val_id, val_name, val_count) {
+    setVal(val_id, val_distance, val_startDate, val_endDate, val_comment) {
         this.e_id = val_id;
-        this.e_name = val_name;
-        this.e_count = val_count;
+        this.e_startDate = val_startDate;
+        this.e_endDate = val_endDate;
+        this.e_comment = val_comment;
     },
 
     createItem: function createItem() {
@@ -154,7 +160,7 @@ export default {
         post('/api/jogging/register', input)
         .then((response) => {
           console.log("success!!!");
-          _this.newItem = { 'name': '', 'count': '', 'profession': ''};
+          _this.newItem = { 'distance': '', 'startDate': '', 'endDate': '', 'comment': ''};
           _this.getVueItems();
         })
         .catch((err) => {
@@ -166,14 +172,18 @@ export default {
     },
     editItem: function(){
       var id = document.getElementById('e_id');
-      var name = document.getElementById('e_name');
-      var count = document.getElementById('e_count');
+      var distance = document.getElementById('e_distance');
+      var startDate = document.getElementById('e_startDate');
+      var endDate = document.getElementById('e_endDate');
+      var comment = document.getElementById('e_comment');
 
       this.showModal=false;
       var data = {
         id: id.value,
-        name: name.value,
-        count: count.value
+        distance: distance.value,
+        startDate: startDate.value,
+        endDate: endDate.value,
+        comment: comment.value
       }
       post('/api/jogging/update', data)
       .then((response) => {
@@ -206,4 +216,72 @@ export default {
   }
 }
 </script>
+<style>
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: auto;
+    margin: 0;
+}
+.full-height {
+    min-height: 100vh;
+}
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.position-ref {
+    position: relative;
+}
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+.content {
+/*  text-align: center; */
+}
+.title {
+    font-size: 84px;
+}
+.m-b-md {
+    margin-bottom: 30px;
+}
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+.modal-body {
+  margin: 20px 0;
+}
+</style>
+
 
