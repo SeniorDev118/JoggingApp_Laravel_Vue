@@ -34976,7 +34976,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\nhtml, body {\n    background-color: #fff;\n    color: #636b6f;\n    font-family: 'Raleway', sans-serif;\n    font-weight: 100;\n    height: auto;\n    margin: 0;\n}\n.full-height {\n    min-height: 100vh;\n}\n.flex-center {\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.position-ref {\n    position: relative;\n}\n.top-right {\n    position: absolute;\n    right: 10px;\n    top: 18px;\n}\n.content {\n/*  text-align: center; */\n}\n.title {\n    font-size: 84px;\n}\n.m-b-md {\n    margin-bottom: 30px;\n}\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 300px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n          box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  -webkit-transition: all .3s ease;\n  transition: all .3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n", ""]);
+exports.push([module.i, "\nhtml, body {\n    background-color: #fff;\n    color: #636b6f;\n    font-family: 'Raleway', sans-serif;\n    font-weight: 100;\n    height: auto;\n    margin: 0;\n}\n.full-height {\n    min-height: 100vh;\n}\n.flex-center {\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.position-ref {\n    position: relative;\n}\n.top-right {\n    position: absolute;\n    right: 10px;\n    top: 18px;\n}\n.content {\n/*  text-align: center; */\n}\n.title {\n    font-size: 84px;\n}\n.m-b-md {\n    margin-bottom: 30px;\n}\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 300px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n          box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  -webkit-transition: all .3s ease;\n  transition: all .3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.add-button {\n    width: 100% !important;\n}\n", ""]);
 
 // exports
 
@@ -34988,6 +34988,7 @@ exports.push([module.i, "\nhtml, body {\n    background-color: #fff;\n    color:
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(4);
+//
 //
 //
 //
@@ -35121,6 +35122,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.getVueItems();
   },
   methods: {
+    indexNumber: function indexNumber(index) {
+      return index + 1;
+    },
     getVueItems: function getVueItems() {
       var _this = this;
 
@@ -35211,7 +35215,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "flex-center position-ref full-height" }, [
+  return _c("div", { staticClass: "flex-center position-ref" }, [
     _c("div", { attrs: { id: "vue-wrapper" } }, [
       _c(
         "div",
@@ -35349,12 +35353,12 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group text-left" }, [
+          _c("div", { staticClass: "form-group" }, [
             _c(
               "button",
               {
-                staticClass: "btn btn-primary",
-                attrs: { id: "name", name: "name" },
+                staticClass: "btn btn-primary add-button",
+                attrs: { name: "add-button" },
                 on: {
                   click: function($event) {
                     $event.preventDefault()
@@ -35364,7 +35368,7 @@ var render = function() {
               },
               [
                 _c("span", { staticClass: "glyphicon glyphicon-plus" }),
-                _vm._v(" ADD\n          ")
+                _vm._v(" Create Entry\n          ")
               ]
             )
           ]),
@@ -35400,9 +35404,9 @@ var render = function() {
                 [
                   _vm._m(0),
                   _vm._v(" "),
-                  _vm._l(_vm.items, function(item) {
+                  _vm._l(_vm.items, function(item, index) {
                     return _c("tr", [
-                      _c("td", [_vm._v(_vm._s(item.id))]),
+                      _c("td", [_vm._v(_vm._s(_vm.indexNumber(index)))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(item.distance))]),
                       _vm._v(" "),
@@ -35591,7 +35595,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("EndDate")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Comment")])
+        _c("th", [_vm._v("Comment")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Edit & Delete")])
       ])
     ])
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-center position-ref full-height">
+  <div class="flex-center position-ref">
       <div id="vue-wrapper">
         <div class="content">
           <div class="form-group text-left">
@@ -29,8 +29,8 @@
               required v-model="newItem.comment" placeholder=" Enter Comment">
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" width="100%" id="name" name="name" @click.prevent="createItem()">
-                <span class="glyphicon glyphicon-plus"></span> ADD
+            <button class="btn btn-primary add-button" name="add-button" @click.prevent="createItem()">
+                <span class="glyphicon glyphicon-plus"></span> Create Entry
             </button>
           </div>
 
@@ -50,10 +50,11 @@
                 <th>StartDate</th>
                 <th>EndDate</th>
                 <th>Comment</th>
+                <th>Edit & Delete</th>
               </tr>
             </thead>
-            <tr v-for="item in items">
-              <td>{{ item.id }}</td>
+            <tr v-for="(item, index) in items">
+              <td>{{ indexNumber(index) }}</td>
               <td>{{ item.distance }}</td>
               <td>{{ item.startdate }}</td>
               <td>{{ item.enddate }}</td>
@@ -129,6 +130,9 @@ export default {
     this.getVueItems();
   },
   methods: {
+    indexNumber: function (index) {
+        return index+1
+    },
     getVueItems: function getVueItems() {
       var _this = this;
 
@@ -281,6 +285,9 @@ html, body {
 }
 .modal-body {
   margin: 20px 0;
+}
+.add-button {
+    width: 100% !important;
 }
 </style>
 
