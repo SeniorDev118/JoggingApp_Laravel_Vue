@@ -61,7 +61,7 @@
               <td>{{ item.comment }}</td>
 
               <td id="show-modal" class="btn btn-info">
-                <span @click="showModal=true; setVal(item.id, item.distance, item.startDate, item.endDate, item.comment)" >EDIT</span>
+                <span @click="showModal=true; setVal(item.id, item.distance, item.startdate, item.enddate, item.comment)" >EDIT</span>
               </td>
 
               <td class="btn btn-danger" @click.prevent="deleteItem(item)">
@@ -72,9 +72,8 @@
         </div>
 
         <modal v-if="showModal" @close="showModal=false">
-          <h3 slot="header">Edit Item</h3>
+          <h3 slot="header">Edit Entry</h3>
           <div slot="body">
-
             <input type="hidden" disabled class="form-control" id="e_id" name="id"
                     required  :value="this.e_id">
               ID:
@@ -89,19 +88,37 @@
               Comment:
             <input type="text" class="form-control" id="e_comment" name="comment"
                   required  :value="this.e_comment">
-
           </div>
           <div slot="footer">
             <button class="btn btn-default" @click="showModal = false">
               Cancel
             </button>
-
             <button class="btn btn-info" @click="editItem()">
               Update
             </button>
           </div>
         </modal>
-
+        <script type="text/x-template" id="modal-template">
+        <transition name="modal">
+            <div class="modal-mask">
+                <div class="modal-wrapper">
+                    <div class="modal-container">
+                        <div class="modal-header">
+                            <slot name="header">
+                                default header
+                            </slot>
+                        </div>
+                        <div class="modal-body">
+                            <slot name="body"></slot>
+                        </div>
+                        <div class="modal-footer">
+                            <slot name="footer"></slot>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+        </script>
       </div>
     </div>
   </div>

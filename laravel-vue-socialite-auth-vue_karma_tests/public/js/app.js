@@ -35097,6 +35097,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -35432,8 +35449,8 @@ var render = function() {
                                   _vm.setVal(
                                     item.id,
                                     item.distance,
-                                    item.startDate,
-                                    item.endDate,
+                                    item.startdate,
+                                    item.enddate,
                                     item.comment
                                   )
                                 }
@@ -35483,7 +35500,7 @@ var render = function() {
                 },
                 [
                   _c("h3", { attrs: { slot: "header" }, slot: "header" }, [
-                    _vm._v("Edit Item")
+                    _vm._v("Edit Entry")
                   ]),
                   _vm._v(" "),
                   _c("div", { attrs: { slot: "body" }, slot: "body" }, [
@@ -35573,7 +35590,17 @@ var render = function() {
                   ])
                 ]
               )
-            : _vm._e()
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "script",
+            { attrs: { type: "text/x-template", id: "modal-template" } },
+            [
+              _vm._v(
+                '\n      <transition name="modal">\n          <div class="modal-mask">\n              <div class="modal-wrapper">\n                  <div class="modal-container">\n                      <div class="modal-header">\n                          <slot name="header">\n                              default header\n                          </slot>\n                      </div>\n                      <div class="modal-body">\n                          <slot name="body"></slot>\n                      </div>\n                      <div class="modal-footer">\n                          <slot name="footer"></slot>\n                      </div>\n                  </div>\n              </div>\n          </div>\n      </transition>\n      '
+              )
+            ]
+          )
         ],
         1
       )
