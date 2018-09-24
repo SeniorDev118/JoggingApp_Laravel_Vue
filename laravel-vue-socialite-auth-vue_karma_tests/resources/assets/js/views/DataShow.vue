@@ -162,6 +162,7 @@ export default {
       })
     },
     setVal(val_id, val_distance, val_startDate, val_endDate, val_comment) {
+        console.log("id", val_id);
         this.e_id = val_id;
         this.e_startDate = val_startDate;
         this.e_endDate = val_endDate;

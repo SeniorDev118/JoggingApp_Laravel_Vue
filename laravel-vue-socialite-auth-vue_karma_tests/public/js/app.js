@@ -35152,6 +35152,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     setVal: function setVal(val_id, val_distance, val_startDate, val_endDate, val_comment) {
+      console.log("id", val_id);
       this.e_id = val_id;
       this.e_startDate = val_startDate;
       this.e_endDate = val_endDate;
